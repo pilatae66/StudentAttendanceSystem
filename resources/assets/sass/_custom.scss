@@ -1,0 +1,19 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 50px;
+}
+footer {
+  position: fixed;
+  height: 50px;
+  background-color: white;
+  border: 1px solid silver;
+  bottom: 0;
+  width: 100%;
+  z-index: 999999;
+}
