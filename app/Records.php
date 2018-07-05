@@ -8,7 +8,7 @@ class Records extends Model
 {
   protected $primaryKey = 'record_id';
 
-  protected $fillable = ['record_id', 'stud_id', 'event_id', 'stud_att', 'sign_type'];
+  protected $fillable = ['record_id', 'stud_id', 'event_id', 'stud_att', 'sign_type', 'school_year', 'semester'];
 
   public function student()
   {

@@ -50,6 +50,8 @@ class RecordController extends Controller
     $this->validate($request, [
       'id' => 'required'
     ]);
+    $status = SchoolStatus::first();
+
     if($request->submitButton == 'sign'){
       if(!is_null($request->event_id)){
         $event_checks = Events::where('event_date', date("Y-m-d"))->with('schedule')->first();
@@ -62,12 +64,16 @@ class RecordController extends Controller
                 $record->stud_id = $request->input('id');
                 $record->event_id = $request->input('event_id');
                 $record->sign_type = $request->sign_type;
+                $record->school_year = $status->school_year;
+                $record->semester = $status->semester;
 
 
                 $student = Students::where('stud_id', '=', $request->input('id'))->first();
                 $history = new History;
                 $history->incident = $student->stud_fname." ".$student->stud_lname." Signed ".$request->sign_type;
                 $history->full_name = $student->stud_fname." ".$student->stud_lname;
+                $history->school_year = $status->school_year;
+                $history->semester = $status->semester;
 
                 $history->save();
 
@@ -80,6 +86,8 @@ class RecordController extends Controller
                 $history = new History;
                 $history->incident = 'Duplicate Sign';
                 $history->full_name = $student->stud_fname." ".$student->stud_lname;
+                $history->school_year = $status->school_year;
+                $history->semester = $status->semester;
 
                 $history->save();
 
@@ -103,6 +111,8 @@ class RecordController extends Controller
           $history = new History;
           $history->incident = 'No event signing';
           $history->full_name = $student->stud_fname." ".$student->stud_lname;
+          $history->school_year = $status->school_year;
+          $history->semester = $status->semester;
 
           $history->save();
           Notify::error('Theres no event today.','No Event!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-remove']);
@@ -112,6 +122,8 @@ class RecordController extends Controller
           $history = new History;
           $history->incident = 'No event signing';
           $history->full_name = "Anonymous";
+          $history->school_year = $status->school_year;
+          $history->semester = $status->semester;
 
           $history->save();
           Notify::error('Theres no event today.','No Event!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-remove']);
@@ -126,6 +138,8 @@ class RecordController extends Controller
         $history = new History;
         $history->incident = 'Signing In/Out before schedule';
         $history->full_name= $student->stud_fname." ".$student->stud_lname;
+        $history->school_year = $status->school_year;
+        $history->semester = $status->semester;
 
         $history->save();
 
@@ -135,6 +149,8 @@ class RecordController extends Controller
         $history = new History;
         $history->incident = 'Signing In/Out before schedule';
         $history->full_name= "Anonymous";
+        $history->school_year = $status->school_year;
+        $history->semester = $status->semester;
 
         $history->save();
 
@@ -193,6 +209,8 @@ class RecordController extends Controller
 
     $record->record_title = $request->record_title;
     $record->record_amount = $request->record_amount;
+    $record->school_year = $status->school_year;
+    $record->semester = $status->semester;
 
 
     $record->save();

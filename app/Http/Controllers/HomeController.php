@@ -43,12 +43,7 @@ class HomeController extends Controller
             ->width(0);
 
     $records = Records::distinct()->get(['stud_id', 'event_id', 'record_title']);
-
-    foreach ($records as $key => $record) {
-      if(!is_null($record->event_id)){
-        $record->event_name = $record->event->event_name;
-      }
-    }
+    
     $recordss = $records->filter(function ($record) {
         return $record->record_title != 'Uniform';
     });

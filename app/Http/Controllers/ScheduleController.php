@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Schedule;
-use Carbon\Carbon;
 use App\History;
+use Carbon\Carbon;
 use Auth;
 use Notify;
 
@@ -66,9 +66,13 @@ class ScheduleController extends Controller
       return back()->withInput();
     }
     else{
+      $status = SchoolStatus::first();
+
       $history = new History;
       $history->incident = " Schedule for ".$schedule->event->event_name." Added ";
       $history->full_name = Auth::user()->fname ." ". Auth::user()->lname;
+      $history->school_year = $status->school_year;
+      $history->semester = $status->semester;
 
       $history->save();
       $schedule->save();
@@ -132,9 +136,13 @@ class ScheduleController extends Controller
       $schedule->sign_type = "Evening " . $request->sign_type;
     }
 
+    $status = SchoolStatus::first();
+
     $history = new History;
     $history->incident = " Schedule for ".$schedule->event->event_name." Edited ";
     $history->full_name = Auth::user()->fname ." ". Auth::user()->lname;
+    $history->school_year = $status->school_year;
+    $history->semester = $status->semester;
 
     $history->save();
     $schedule->save();
@@ -151,10 +159,16 @@ class ScheduleController extends Controller
   */
   public function destroy($id)
   {
+    $status = SchoolStatus::first();
     $schedule = Schedule::find($id);
+
+    $status = SchoolStatus::first();
+
     $history = new History;
     $history->incident = " Schedule for ".$schedule->event->event_name." Deleted";
     $history->full_name = Auth::user()->fname ." ". Auth::user()->lname;
+    $history->school_year = $status->school_year;
+    $history->semester = $status->semester;
 
     $history->save();
     $schedule->delete();

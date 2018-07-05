@@ -8,7 +8,7 @@ class History extends Model
 {
   protected $primaryKey = 'history_id';
 
-  protected $fillable = ['incident', 'id'];
+  protected $fillable = ['incident', 'id', 'school_year', 'semester'];
 
   public function student()
   {

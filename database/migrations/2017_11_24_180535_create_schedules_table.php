@@ -15,9 +15,12 @@ class CreateSchedulesTable extends Migration
   {
     Schema::create('schedules', function (Blueprint $table) {
       $table->increments('id');
-      $table->integer('event_id')->unsigned();
+      $table->unsignedInteger('event_id');
+      $table->foreign('event_id')
+      ->references('event_id')->on('events')
+      ->onDelete('cascade');
       $table->time('event_time');
-        $table->integer('duration');
+      $table->integer('duration');
       $table->string('sign_type');
       $table->timestamps();
     });

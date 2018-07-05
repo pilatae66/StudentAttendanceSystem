@@ -19,6 +19,8 @@ class CreateRecordsTable extends Migration
       $table->integer('event_id')->nullable();
       $table->string('record_title')->nullable();
       $table->string('sign_type');
+      $table->string('school_year');
+      $table->string('semester');
       $table->timestamps();
       //
     });

@@ -8,7 +8,7 @@ class Events extends Model
 {
   protected $primaryKey = 'event_id';
 
-  protected $fillable = ['event_id', 'event_name', 'event_att_amount', 'event_date', 'fine_amount'];
+  protected $fillable = ['event_id', 'event_name', 'event_att_amount', 'event_date', 'fine_amount', 'school_year', 'semester'];
 
   public function records()
   {

@@ -48,14 +48,19 @@ class EventController extends Controller
       'eventname' => 'required',
       'eventdate' => 'required'
     ]);
+    $status = SchoolStatus::first();
 
     $event = new Events;
     $event->event_name = $request->input('eventname');
     $event->event_date = $request->input('eventdate');
+    $event->school_year = $status->school_year;
+    $event->semester = $status->semester;
 
     $history = new History;
     $history->incident = $request->eventname." Event Added ";
     $history->full_name = Auth::user()->fname ." ". Auth::user()->lname;
+    $history->school_year = $status->school_year;
+    $history->semester = $status->semester;
 
     $history->save();
     $event->save();
@@ -106,12 +111,16 @@ class EventController extends Controller
     $event = Events::find($id);
     $event->event_name = $request->input('eventname');
     $event->event_date = $request->input('eventdate');
+    $event->school_year = $status->school_year;
+    $event->semester = $status->semester;
 
 
 
     $history = new History;
     $history->incident = $event->event_name." Event Updated";
     $history->full_name = Auth::user()->fname ." ". Auth::user()->lname;
+    $history->school_year = $status->school_year;
+    $history->semester = $status->semester;
 
     $history->save();
     $event->save();
@@ -134,6 +143,8 @@ class EventController extends Controller
     $history = new History;
     $history->incident = $event->event_name." Event Deleted";
     $history->full_name = Auth::user()->fname ." ". Auth::user()->lname;
+    $history->school_year = $status->school_year;
+    $history->semester = $status->semester;
 
     $history->save();
     $event->delete();

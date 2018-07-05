@@ -8,6 +8,7 @@ use App\Fines;
 use App\History;
 use App\Records;
 use App\Schedule;
+use App\SchoolStatus;
 use Auth;
 use Hash;
 use Notify;
@@ -27,7 +28,7 @@ class StudentController extends Controller
   * @return \Illuminate\Http\Response
   */
   public function saveFines(){
-    $studentss = Students::orderBy('lname', 'asc')->get();
+    $studentss = Students::orderBy('lname', 'asc')->where('isActive', 'Active')->get();
     $events = Events::all();
     $fines = Fines::first();
     $fine = 0;
@@ -48,7 +49,7 @@ class StudentController extends Controller
         }
         $fine += (($event->schedule->count() - $count) * $fines->fine_amount) + $uni_fine;
       }
-      $temp = Students::where('stud_id', $student->stud_id)->first();
+      $temp = Students::where('stud_id', $student->stud_id)->where('isActive', 'Active')->first();
       $student->stud_fines = $fine;
       $student->save();
     }
@@ -74,6 +75,7 @@ class StudentController extends Controller
 
   public function report($id)
   {
+    $status = SchoolStatus::first();
     $fine_amount = Fines::first();
     $student = Students::where('stud_id',$id)->select('stud_id', 'fname', 'lname')->first();
     if(!is_null($student)){
@@ -210,6 +212,8 @@ class StudentController extends Controller
       $history = new History;
       $history->incident = "Student ".$student->fname." ".$student->lname." checked their account";
       $history->full_name = $student->fname ." ". $student->lname;
+      $history->school_year = $status->school_year;
+      $history->semester = $status->semester;
 
       $history->save();
 
@@ -223,6 +227,8 @@ class StudentController extends Controller
       $history = new History;
       $history->incident = "Anonymous checked their account. Student not found in the database!";
       $history->full_name = "Anonymous";
+      $history->school_year = $status->school_year;
+      $history->semester = $status->semester;
 
       $history->save();
       Notify::error('Student is not found in the database!','Student not found!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-remove']);
@@ -255,9 +261,13 @@ class StudentController extends Controller
 
     $user->save();
 
+    $status = SchoolStatus::first();
+
     $history = new History;
     $history->incident = "Student ".$request->fname." ".$request->lname." Added ";
     $history->full_name = Auth::user()->fname ." ". Auth::user()->lname;
+    $history->school_year = $status->school_year;
+    $history->semester = $status->semester;
 
     $history->save();
 
@@ -321,9 +331,14 @@ class StudentController extends Controller
     $user->stud_year = $request->input('yearlvl');
 
     $user->save();
+
+    $status = SchoolStatus::first();
+
     $history = new History;
     $history->incident = "Student ".$user->fname." ".$user->lname." Edited ";
     $history->full_name = Auth::user()->fname ." ". Auth::user()->lname;
+    $history->school_year = $status->school_year;
+    $history->semester = $status->semester;
 
     $history->save();
     Notify::info('Student Updated Successfully','Success!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-ok']);
@@ -341,9 +356,14 @@ class StudentController extends Controller
   public function destroy($id)
   {
     $student = Students::find($id);
+
+    $status = SchoolStatus::first();
+
     $history = new History;
     $history->incident = "Student ".$student->fname." ".$student->lname." Deleted ";
     $history->full_name = Auth::user()->fname ." ". Auth::user()->lname;
+    $history->school_year = $status->school_year;
+    $history->semester = $status->semester;
 
     $history->save();
     $student->delete();
@@ -363,11 +383,14 @@ class StudentController extends Controller
     $this->validate($request, [
       'uni_fine' => 'required',
     ]);
+    $status = SchoolStatus::first();
     $record = new Records;
 
     $record->stud_id = $id;
     $record->record_title = 'Uniform';
     $record->record_amount = $request->uni_fine;
+    $record->school_year = $status->school_year;
+    $record->semester = $status->semester;
 
     $record->save();
 

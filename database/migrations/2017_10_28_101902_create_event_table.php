@@ -17,6 +17,8 @@ class CreateEventTable extends Migration
       $table->increments('event_id');
       $table->string('event_name');
       $table->date('event_date');
+      $table->string('school_year');
+      $table->string('semester');
       $table->timestamps();
       //
     });

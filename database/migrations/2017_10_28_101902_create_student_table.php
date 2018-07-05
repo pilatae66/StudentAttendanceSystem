@@ -21,8 +21,7 @@ class CreateStudentTable extends Migration
       $table->string('stud_year');
       $table->integer('stud_fines');
       $table->string('password');
-      $table->string('email')->unique();
-      $table->rememberToken();
+      $table->string('isActive');
       $table->timestamps();
       //
     });

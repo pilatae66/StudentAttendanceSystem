@@ -11,7 +11,8 @@ class AttendanceController extends Controller
 
   public function sign()
   {
-    $event = Events::where('event_date', date("Y-m-d"))->first();
+    $status = SchoolStatus::first();
+    $event = Events::where('event_date', date("Y-m-d"))->where('school_year', $status->school_year)->where('semester', $semester)->first();
     if(!is_null($event)){
       foreach ($event->schedule as $key => $value) {
         if(Carbon::now()->format('H:i') >= Carbon::parse($value->event_time)->toTimeString() && Carbon::now()->format('h:i') <= Carbon::parse($value->event_time)->addMinutes(30)->toTimeString()){
