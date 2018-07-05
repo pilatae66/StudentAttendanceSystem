@@ -165,6 +165,5 @@ $(function(){
   {!! Charts::scripts() !!}
   {!! $chart->script() !!}
 @endif
-@include('laravelPnotify::notify')
 </body>
 </html>

@@ -57,8 +57,7 @@ class StudentController extends Controller
 
   public function index()
   {
-    $this->saveFines();
-    $students = Students::orderBy('lname', 'asc')->paginate(10);
+    $students = Students::where('isActive', 'Active')->orderBy('lname', 'asc')->get();
 
     return view('student.index', ['students' => $students]);
   }

@@ -15,7 +15,7 @@ Auth::routes();
 
 Route::get('dashboard', 'HomeController@index')->name('dashboard');
 
-Route::get('admin', 'AdminController@index');
+Route::get('admin', 'AdminController@index')->name('admin.index');
 
 Route::get('admin/{id}', 'AdminController@show')->name('admin.edit');
 

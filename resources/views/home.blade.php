@@ -1,76 +1,113 @@
 @extends('layouts.app')
-@section('title')
-  Dashboard
-@endsection
 @section('content')
-  <section class="content-header">
-     <h1>
-       Dashboard
-       <small></small>
-     </h1>
-     <ol class="breadcrumb">
-       <li><a href="{{ url('dashboard') }}"><i class="fa fa-home"></i> Home</a></li>
-     </ol>
-   </section>
-<section class="content">
+<div class="content">
   <div class="row">
+    
     <div class="col-md-3">
-      <div class="info-box">
-        <!-- Apply any bg-* class to to the icon to color it -->
-        <span class="info-box-icon bg-blue"><i class="fa fa-user-o"></i></span>
-        <div class="info-box-content">
-          <span class="info-box-text">Student</span>
-          <span class="info-box-number">{{ $student }}</span>
-        </div><!-- /.info-box-content -->
-      </div><!-- /.info-box -->
-    </div>
-    <div class="col-md-3">
-      <div class="info-box">
-        <!-- Apply any bg-* class to to the icon to color it -->
-        <span class="info-box-icon bg-red"><i class="fa fa-calendar"></i></span>
-        <div class="info-box-content">
-          <span class="info-box-text">Events</span>
-          <span class="info-box-number">{{ $event }}</span>
-        </div><!-- /.info-box-content -->
-      </div><!-- /.info-box -->
-    </div>
-    <div class="col-md-3">
-      <div class="info-box">
-        <!-- Apply any bg-* class to to the icon to color it -->
-        <span class="info-box-icon bg-blue"><i class="fa fa-user-o"></i></span>
-        <div class="info-box-content">
-          <span class="info-box-text">Active<br>Students</span>
-          <span class="info-box-number">{{ $active }}</span>
-        </div><!-- /.info-box-content -->
-      </div><!-- /.info-box -->
-    </div>
-    <div class="col-md-3">
-      <div class="info-box">
-        <!-- Apply any bg-* class to to the icon to color it -->
-        <span class="info-box-icon bg-green">&#8369;</span>
-        <div class="info-box-content">
-          <span class="info-box-text">Total Fines</span>
-          <span class="info-box-number">&#8369;{{ $fines }}</span>
-        </div><!-- /.info-box-content -->
-      </div><!-- /.info-box -->
-    </div>
-  </div>
-  <div class="box">
-        <div class="box-header with-border">
-          <h3 class="box-title">Dashboard</h3>
-          <div class="box-tools pull-right">
-            <!-- Buttons, labels, and many other things can be placed here! -->
-          </div><!-- /.box-tools -->
-        </div><!-- /.box-header -->
-        <div class="box-body">
+      <div class="card card-stats">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center icon-warning">
+                <i class="nc-icon nc-single-02 text-info"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Students</p>
+                <p class="card-title">{{ $student }}<p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer ">
+            <hr>
+            <div class="stats">
+              Number of registered students
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="card card-stats">
+          <div class="card-body ">
+            <div class="row">
+              <div class="col-5 col-md-4">
+                <div class="icon-big text-center icon-warning">
+                  <i class="nc-icon nc-tag-content text-success"></i>
+                </div>
+              </div>
+              <div class="col-7 col-md-8">
+                <div class="numbers">
+                  <p class="card-category">Events</p>
+                  <p class="card-title">{{ $event }}<p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer ">
+              <hr>
+              <div class="stats">
+                Number of registered events
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-satisfied text-info"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Active Students</p>
+                      <p class="card-title">{{ $active }}<p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer ">
+                  <hr>
+                  <div class="stats">
+                    Number of active students
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="col-md-3">
-              {!! $chart_student->html() !!}
-            </div>
-            <div class="col-md-8">
-              {!! $chart_records->html() !!}
-            </div>
-        </div><!-- /.box-body -->
-        <br>
-        <br>
-    </section>
-@endsection
+                <div class="card card-stats">
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                            &#8369;
+                        </div>
+                      </div>
+                      <div class="col-7 col-md-8">
+                        <div class="numbers">
+                          <p class="card-category">Total Fines</p>
+                          <p class="card-title">&#8369;{{ $fines }}<p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-footer ">
+                      <hr>
+                      <div class="stats">
+                        Sum of all student fines
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+      </div>
+    </div>
+    @endsection
+    
