@@ -33,20 +33,14 @@
             <ul class="nav">
               <li>
                 <a href="#">
-                  <span class="sidebar-mini-icon">MP</span>
+                  <span class="sidebar-mini-icon"> <i class="nc-icon nc-touch-id"></i></span>
                   <span class="sidebar-normal">My Profile</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span class="sidebar-mini-icon">EP</span>
-                  <span class="sidebar-normal">Edit Profile</span>
                 </a>
               </li>
               <li><a class="dropdown-item" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
-                <span class="sidebar-mini-icon">L</span>
+                <span class="sidebar-mini-icon"><i class="nc-icon nc-button-power"></i></span>
                 <span class="sidebar-normal">Logout</span>
               </a>
               
