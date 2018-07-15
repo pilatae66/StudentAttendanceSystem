@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contribution;
 use Notify;
+use App\SchoolStatus;
 
 class ContributionController extends Controller
 {
@@ -16,7 +17,8 @@ class ContributionController extends Controller
 
   public function index()
   {
-    $contributions = Contribution::paginate(10);
+    $status = SchoolStatus::first();
+    $contributions = Contribution::where('school_year', $status->school_year)->where('semester', $status->semester)->get();
 
     return view('contribution.index', compact('contributions'));
   }
@@ -31,19 +33,33 @@ class ContributionController extends Controller
     $this->validate($request, [
       'cont_title' => 'required',
       'cont_amount' => 'required',
-      'school_year' => 'required',
-      'semester' => 'required',
     ]);
+
+    $status = SchoolStatus::first();
 
     $contribution = new Contribution;
     $contribution->cont_title = $request->cont_title;
     $contribution->cont_amount = $request->cont_amount;
-    $contribution->school_year = $request->school_year;
-    $contribution->semester = $request->semester;
+    $contribution->school_year = $status->school_year;
+    $contribution->semester = $status->semester;
 
     $contribution->save();
 
-    Notify::info('Contribution Added Successfully!','Success!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-ok']);
+    alert()->success('Contribution Created', 'Successfully')->toToast('top'); 
+    return redirect()->route('cont.index');
+  }
+
+  public function edit($id)
+  {
+    
+  }
+
+  public function destroy($id)
+  {
+    $cont = Contribution::where('cont_id', $id)->first();
+    $cont->delete();
+
+    alert()->success('Contribution Deleted', 'Successfully')->toToast('top'); 
     return redirect()->route('cont.index');
   }
 

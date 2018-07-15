@@ -32,4 +32,9 @@ class Students extends Authenticatable
     return $this->hasMany(Events::class);
   }
 
+  public function getFullNameAttribute()
+  {
+    return $this->fname . " " . $this->lname;
+  }
+
 }

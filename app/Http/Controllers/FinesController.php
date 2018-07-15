@@ -6,6 +6,7 @@ use App\History;
 use Auth;
 use Illuminate\Http\Request;
 use Notify;
+use App\SchoolStatus;
 
 class FinesController extends Controller
 {
@@ -20,9 +21,9 @@ class FinesController extends Controller
      */
     public function index()
     {
-      $fines = Fines::first();
+      $fine = Fines::first();
 
-      return view('fines.index', ['fines' => $fines]);
+      return view('fines.index', compact('fine'));
     }
 
     /**
@@ -65,6 +66,7 @@ class FinesController extends Controller
      */
     public function edit($id)
     {
+
       $fine = Fines::find($id);
 
       return view('fines.edit', ['fine' => $fine]);
@@ -79,17 +81,24 @@ class FinesController extends Controller
      */
     public function update(Request $request, $id)
     {
+      $this->validate($request, [
+        'fine_amount' => 'required|numeric'
+      ]);
+      $status = SchoolStatus::first();
+
       $fine = Fines::find($id);
 
       $history = new History;
       $history->incident = "&#8369;".$fine->fine_amount." Fine Edit to &#8369;".$request->fine_amount;
       $history->full_name = Auth::user()->fname ." ". Auth::user()->lname;
-
+      $history->semester = $status->semester;
+      $history->school_year = $status->school_year;
+      
       $history->save();
       $fine->fine_amount = $request->fine_amount;
       $fine->save();
 
-      Notify::info('Fine Amount Updated Successfully!','Success!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-ok']);
+      alert()->success('Fines Edited', 'Successfully')->toToast('top'); 
       return redirect('fines');
     }
 

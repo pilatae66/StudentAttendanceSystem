@@ -143,6 +143,8 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/jquery.mask.js') }}"></script>
+<script src="{{ asset('js/new/sweetalert2.all.js') }}"></script>
+@include('sweetalert::alert')
 
 <script>
 $(document).ready(function(){

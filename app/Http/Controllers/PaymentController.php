@@ -1,16 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\History;
 
+use App\Payment;
 use Illuminate\Http\Request;
+use App\SchoolStatus;
 
-class HistoryController extends Controller
+class PaymentController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,9 +20,10 @@ class HistoryController extends Controller
      */
     public function index()
     {
-      $historys = History::orderBy('created_at', 'dec')->get();
-
-      return view('history.index')->with(['historys' => $historys]);
+        $status = SchoolStatus::first();
+        $payments = Payment::all();
+    
+        return view('payment.index', compact('payments'));
     }
 
     /**
@@ -47,10 +50,10 @@ class HistoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Payment $payment)
     {
         //
     }
@@ -58,10 +61,10 @@ class HistoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Payment $payment)
     {
         //
     }
@@ -70,10 +73,10 @@ class HistoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Payment $payment)
     {
         //
     }
@@ -81,10 +84,10 @@ class HistoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Payment $payment)
     {
         //
     }

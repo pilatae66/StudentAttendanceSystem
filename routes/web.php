@@ -9,7 +9,7 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Auth::routes();
 
@@ -41,11 +41,7 @@ Route::get('student/record/{id}', 'RecordController@show');
 
 Route::get('event/{id}/schedule', 'ScheduleController@show');
 
-Route::get('student/uniform/{id}', 'StudentController@uniform')->name('student.uniform');
-
-Route::patch('student/uniform/{id}', 'StudentController@addUniformFine')->name('student.addUniformFine');
-
-Route::post('student/search', 'StudentController@search')->name('student.search');
+Route::get('student/uniform/{id}', 'StudentController@addUniformFine')->name('student.addUniformFine');
 
 //Student Routes
 
@@ -63,6 +59,10 @@ Route::post('guest-password/reset', 'Student\ForgotPasswordController@reset');
 
 Route::get('guest-password/reset/{token}', 'Student\ResetPasswordController@showResetForm')->name('student.auth.pasword.reset');
 
+Route::get('stud/master', 'StudentController@getMasterList')->name('student.master');
+
+Route::get('stud/{id}/activate', 'StudentController@activate')->name('student.activate');
+
 //Contribution Routes
 
 Route::get('contribution', 'ContributionController@index')->name('cont.index');
@@ -71,6 +71,12 @@ Route::post('contribution', 'ContributionController@store')->name('cont.store');
 
 Route::get('contribution/create', 'ContributionController@create')->name('cont.create');
 
+Route::get('contribution/{id}/edit', 'ContributionController@edit')->name('cont.edit');
+
+Route::delete('contribution/{id}', 'ContributionController@destroy')->name('cont.delete');
+
 //Uniform Routes
 
 Route::get('uniform', 'RecordController@uniformIndex')->name('uniform.index');
+
+Route::get('payment', 'PaymentController@index')->name('payment.index');

@@ -65,7 +65,8 @@ class EventController extends Controller
     $history->save();
     $event->save();
 
-    Notify::info('Event Created Successfully','Success!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-ok']);
+
+    alert()->success('Event Created', 'Successfully')->toToast('top');    
     //Redirect page
     return redirect('/event');
   }
@@ -125,7 +126,8 @@ class EventController extends Controller
     $history->save();
     $event->save();
 
-    Notify::info('Event Edited Successfully','Success!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-ok']);
+
+    alert()->success('Event Updated', 'Successfully')->toToast('top'); 
     //Redirect page
     return redirect('/event');
   }
@@ -149,7 +151,7 @@ class EventController extends Controller
     $history->save();
     $event->delete();
 
-    Notify::info('Event Deleted Successfully','Success!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-ok']);
+    alert()->success('Event Deleted', 'Successfully')->toToast('top'); 
     return redirect('/event');
   }
 }

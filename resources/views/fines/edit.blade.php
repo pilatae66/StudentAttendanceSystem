@@ -1,36 +1,22 @@
 @extends('layouts.app')
-@section('title')
-  Edit Fine Amount
-@endsection
 @section('content')
-  <section class="content-header">
-     <h1>
-       Edit Fine Amount
-       <small></small>
-     </h1>
-     <ol class="breadcrumb">
-       <li><a href="{{ url('dashboard') }}"><i class="fa fa-home"></i> Home</a></li>
-       <li><a href="{{ url('fines') }}"></i> Fines</a></li>
-       <li class="active"><a href="">Edit Fines</a></li>
-     </ol>
-   </section>
-<section class="content">
+<div class="content">
     <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <div class="box box-success box-solid">
-          <div class="box-header"> Edit Fine </div>
-          <div class="box-body"><br>
+      <div class="col-md-8 mr-auto ml-auto">
+        <div class="card">
+          <div class="card-header"> <h5 class="card-title">Edit Fine</h5></div>
+          <div class="card-body"><br>
             {{ Form::open(array('action'=>['FinesController@update', $fine->fine_id], 'method'=>'PATCH', 'class'=>'form-horizontal')) }}
 
-            <div class="form-group{{ $errors->has('fine_amount') ? ' has-error' : '' }}">
-              <div class="col-md-6 col-md-offset-3 input-group">
-                <span class="input-group-addon" style="background-color:#5cb85c;"><div style="color:white;">&#8369;</div></span>
+            <div class="col-md-6 mr-auto ml-auto">
+            <div class="input-group{{ $errors->has('fine_amount') ? ' has-danger' : '' }}">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <div>&#8369;</div>
+                    </div>
+                  </div>
                 {{Form::text('fine_amount', $fine->fine_amount, ['class'=>'form-control'])}}
-                @if ($errors->has('fine_amount'))
-                  <span class="help-block">
-                    <strong>{{ $errors->first('fine_amount') }}</strong>
-                  </span>
-                @endif
+               <label for="fine_amount" class="error">{{ $errors->first('fine_amount') }}</label>
               </div>
             </div>
 
@@ -45,5 +31,5 @@
       </div>
     </div>
   </div>
-</section>
+</div>
 @endsection

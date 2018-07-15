@@ -62,7 +62,8 @@ class ScheduleController extends Controller
     }
 
     if(Schedule::where('event_id', $request->id)->where('sign_type', $schedule->sign_type)->count()>0 ){
-      Notify::error('You entered a duplicate schedule!','Duplicate Schedule!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-remove']);
+      
+      alert()->error('You entered a duplicate schedule', '!')->toToast('top'); 
       return back()->withInput();
     }
     else{
@@ -77,7 +78,7 @@ class ScheduleController extends Controller
       $history->save();
       $schedule->save();
 
-      Notify::info('Schedule Added Successfully!','Success!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-ok']);
+      alert()->success('Schedule Added', 'Successfully')->toToast('top'); 
       return redirect('schedules/'.$request->id);
     }
 
@@ -147,7 +148,8 @@ class ScheduleController extends Controller
     $history->save();
     $schedule->save();
 
-    Notify::success('Schedule Updated Successfully!','Success!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-ok']);
+
+    alert()->success('Schedule Updated', 'Successfully')->toToast('top');     
     return redirect('event');
   }
 
@@ -173,7 +175,8 @@ class ScheduleController extends Controller
     $history->save();
     $schedule->delete();
 
-    Notify::success('Schedule Deleted Successfully!','Success!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-ok']);
+
+    alert()->success('Schedule Deleted', 'Successfully')->toToast('top'); 
     return redirect('schedules/'.$schedule->event_id);;
   }
 }

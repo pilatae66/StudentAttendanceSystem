@@ -13,7 +13,7 @@
 
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-  <link href="{{ ('css/new/font-awesome.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/new/font-awesome.min.css') }}" rel="stylesheet">
   <!-- CSS Files -->
   <link href="{{ asset('css/new/bootstrap.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('css/new/paper-dashboard.min.css?v=2.0.1') }}" rel="stylesheet" />
@@ -21,32 +21,31 @@
 </head>
 
 <body class="sidebar-mini">
-  @include('layouts.navigation.navigation') 
-  @yield('content')
+  @include('layouts.navigation.navigation') @yield('content')
   <footer class="footer footer-black footer-white ">
-      <div class="container-fluid">
-        <div class="row">
-          <nav class="footer-nav">
-            <ul>
-              <li>
-                <a href="https://www.facebook.com/LonerJey" target="_blank">Facebook</a>
-              </li>
-              <li>
-                <a href="https://plus.google.com/u/0/110827035852752819191" target="_blank">Google+</a>
-              </li>
-            </ul>
-          </nav>
-          <div class="credits ml-auto">
-            <span class="copyright">
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="footer-nav">
+          <ul>
+            <li>
+              <a href="https://www.facebook.com/LonerJey" target="_blank">Facebook</a>
+            </li>
+            <li>
+              <a href="https://plus.google.com/u/0/110827035852752819191" target="_blank">Google+</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="credits ml-auto">
+          <span class="copyright">
               © 2017 - 
               <script>
                 document.write(new Date().getFullYear())
               </script>, made with <i class="fa fa-heart heart"></i> by LonerWeb
             </span>
-          </div>
         </div>
       </div>
-    </footer>
+    </div>
+  </footer>
   <!--   Core JS Files   -->
   <script src="{{ asset('js/new/jquery.min.js') }}"></script>
   <script src="{{ asset('js/new/popper.min.js') }}"></script>
@@ -81,14 +80,14 @@
   <script async defer src="{{ asset('js/new/buttons.js') }}"></script>
   <!-- Chart JS -->
   <script src="{{ asset('js/new/chartjs.min.js') }}"></script>
-  <!--  Notifications Plugin    -->
-  <script src="{{ asset('js/new/bootstrap-notify.js') }}"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{ asset('js/new/paper-dashboard.min.js?v=2.0.1') }}" type="text/javascript"></script>
   <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
   <script src="{{ asset('js/new/demo.js') }}"></script>
   <!-- Sharrre libray -->
   <script src="{{ asset('js/new/jquery.sharrre.js') }}"></script>
+  <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
+  @include('sweetalert::alert')
   <script>
     $(document).ready(function () {
 
@@ -286,26 +285,6 @@
       });
 
       var table = $('#datatable').DataTable();
-
-      // Edit record
-      table.on('click', '.edit', function () {
-        $tr = $(this).closest('tr');
-
-        var data = table.row($tr).data();
-        alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
-      });
-
-      // Delete a record
-      table.on('click', '.remove', function (e) {
-        $tr = $(this).closest('tr');
-        table.row($tr).remove().draw();
-        e.preventDefault();
-      });
-
-      //Like record
-      table.on('click', '.like', function () {
-        alert('You clicked on Like button');
-      });
     });
   </script>
 </body>

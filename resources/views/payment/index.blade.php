@@ -5,30 +5,30 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h5 class="card-title">History</h5>
+          <h5 class="card-title">Payment History</h5>
         </div>
         <div class="card-body">
           <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
               <tr>
-                <th>Action</th>
-                <th>Done By</th>
+                <th>Student Name</th>
+                <th>Amount</th>
                 <th>Time</th>
               </tr>
             </thead>
             <tfoot>
               <tr>
-                <th>Action</th>
-                <th>Done By</th>
+                <th>Student Name</th>
+                <th>Amount</th>
                 <th>Time</th>
               </tr>
             </tfoot>
             <tbody>
-              @forelse($historys as $history)
+              @forelse($payments as $payment)
               <tr>
-                <td>{{$history->incident}}</td>
-                <td>{{$history->full_name}}</td>
-                <td>{{$history->created_at->diffForHumans()}}</td>
+                <td>{{$payment->student->fullName}}</td>
+                <td>{{$payment->pay_amount}}</td>
+                <td>{{$payment->created_at->diffForHumans()}}</td>
                 {{-- <td>
                   {{ Form::open(['method' => 'GET', 'style'=>'display:inline-block', 'action' => ['RecordController@show', $student->stud_id]]) }}
                   {{Form::button('<i class="glyphicon glyphicon-eye-open"></i>', array('type' => 'submit', 'class' => 'btn btn-default', 'data-toggle' => 'tooltip', 'title' => 'Show Student Records'))}}

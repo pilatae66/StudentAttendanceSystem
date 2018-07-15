@@ -1,15 +1,12 @@
 @extends('layouts.app')
-@section('title')
-  Student Report
-@endsection
 @section('content')
   @guest
     <section class="container">
       <div class="row">
         <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="panel-heading">Student Report</div>
-            <div class="panel-body table-responsive"><br>
+          <div class="card card-default">
+            <div class="card-heading">Student Report</div>
+            <div class="card-body table-responsive"><br>
               <table class="table table-hover">
                 <thead>
                   <tr class="bg-primary">
@@ -113,7 +110,7 @@
             </div>
 
             <div class="text-center">
-                <h3>&#8369;{{ $total }}</h3>
+                <h4>&#8369;{{ $total }}</h4>
                 TOTAL FINE
             </div><br><br>
           </div>
@@ -122,11 +119,11 @@
 
       <div class="row">
         <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="panel-heading">
+          <div class="card card-default">
+            <div class="card-heading">
               Student Uniform Fines
             </div>
-            <div class="panel-body">
+            <div class="card-body">
               <table class="table table-hover table-responsive">
                 <thead>
                   <tr class="bg-primary">
@@ -147,7 +144,7 @@
               </table>
             </div>
             <div class="text-center">
-                <h3>&#8369;{{ $uni_fines->sum('record_amount') }}</h3>
+                <h4>&#8369;{{ $uni_fines->sum('record_amount') }}</h4>
                 TOTAL FINE
             </div><br><br>
           </div>
@@ -156,11 +153,11 @@
 
       <div class="row">
         <div class="col-md-12">
-          <div class="panel panel-primary text-center">
-            <div class="panel-heading"></div>
-            <div class="panel-body">
+          <div class="card card-primary text-center">
+            <div class="card-heading"></div>
+            <div class="card-body">
               <div class="description-block">
-                <h3 class="description-header">&#8369;{{ $uni_fines->sum('record_amount') + $total }}</h3>
+                <h4 class="description-header">&#8369;{{ $uni_fines->sum('record_amount') + $total }}</h4>
                 <span class="description-text">GRAND TOTAL</span>
               </div><br>
 
@@ -168,37 +165,25 @@
           </div>
         </div>
       </div>
-      </section
+    </section>
   @else
-  <section class="content-header">
-    <h1>
-      Student Reports
-      <small></small>
-    </h1>
-    <ol class="breadcrumb">
-      <li><a href="{{ url('dashboard') }}"><i class="fa fa-home"></i> Home</a></li>
-      <li><a href="{{ url('student') }}">Student</a></li>
-      <li class="active"><a href="">Reports</a></li>
-    </ol>
-  </section>
-  <section class="content">
+  <div class="content">
     <div class="row">
       <div class="col-md-12">
-        <div class="box box-success box-solid">
-          <div class="box-header">
-            <h3 class="box-title">Student Report</h3>
-            <div class="box-tools pull-right">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Student Report</h4>
+            <div class="card-tools pull-right">
               {{ Form::open(['method' => 'GET', 'style' => 'display:inline;', 'action' => ['RecordController@show', $reports[0]['stud_id']]]) }}
-              {{ Form::button('<i class="glyphicon glyphicon-eye-open"></i>', array('type' => 'submit', 'class' => 'btn btn-default', 'data-toggle' => 'tooltip', 'title' => 'Show Student Records'))}}
+              {{ Form::button('<i class="fa fa-eye-open"></i>', array('type' => 'submit', 'class' => 'btn btn-default btn-link', 'data-toggle' => 'tooltip', 'title' => 'Show Student Records'))}}
               {{ Form::close() }}
-              <a href="" class="btn btn-default" data-toggle="tooltip" title="Print Student Report"><span class="glyphicon glyphicon-print"></span></a>
-
+              <a href="" class="btn btn-default btn-link" data-toggle="tooltip" title="Print Student Report"><span class="fa fa-print"></span></a>
             </div>
           </div>
-          <div class="box-body table-responsive"><br>
-            <table class="table table-hover">
+          <div class="card-body"><br>
+            <table class="table">
               <thead>
-                <tr class="bg-primary">
+                <tr class="bg-primary text-white">
                   <th>Event Name</th>
                   <th>Morning In</th>
                   <th>Morning Out</th>
@@ -209,6 +194,18 @@
                   <th>Fines</th>
                 </tr>
               </thead>
+              <tfoot>
+                <tr class="bg-primary text-white">
+                  <th>Event Name</th>
+                  <th>Morning In</th>
+                  <th>Morning Out</th>
+                  <th>Afternoon In</th>
+                  <th>Afternoon Out</th>
+                  <th>Evening Out</th>
+                  <th>Evening In</th>
+                  <th>Fines</th>
+                </tr>
+              </tfoot>
               <tbody>
                 @php
                 $morning_in_class = " ";
@@ -295,13 +292,13 @@
 
                 @endforelse
               </tbody>
-            </table><br>
+            </table><hr>
           </div>
 
-          <div class="box-footer no-padding">
-            <div class="description-block">
-              <h3 class="description-header">&#8369;{{ $total }}</h3>
-              <span class="description-text">TOTAL FINE</span>
+          <div class="card-footer">
+            <div class="text-center">
+              <h4 class="m-0">&#8369;{{ $total }}</h4>
+              <span class="">TOTAL FINE</span>
             </div>
           </div>
         </div>
@@ -310,18 +307,24 @@
 
     <div class="row">
       <div class="col-md-12">
-        <div class="box box-success box-solid">
-          <div class="box-header">
-            <h3 class="box-title">Student Uniform Fines</h3>
+        <div class="card card-success card-solid">
+          <div class="card-header">
+            <h4 class="card-title">Student Uniform Fines</h4>
           </div>
-          <div class="box-body">
-            <table class="table table-hover table-responsive">
+          <div class="card-body">
+            <table class="table">
               <thead>
-                <tr class="bg-primary">
+                <tr class="bg-primary text-white">
                   <th class="text-center">Date seen without uniform</th>
                   <th class="text-center">Amount</th>
                 </tr>
               </thead>
+              <tfoot>
+                <tr class="bg-primary text-white">
+                  <th class="text-center">Date seen without uniform</th>
+                  <th class="text-center">Amount</th>
+                </tr>
+              </tfoot>
               <tbody>
                 @forelse ($uni_fines as $key => $uni_fine)
                   <tr>
@@ -334,10 +337,11 @@
               </tbody>
             </table>
           </div>
-          <div class="box-footer no-padding">
-            <div class="description-block">
-              <h3 class="description-header">&#8369;{{ $uni_fines->sum('record_amount') }}</h3>
-              <span class="description-text">TOTAL FINE</span>
+          <hr>
+          <div class="card-footer no-padding">
+            <div class="text-center">
+              <h4 class="m-0">&#8369;{{ $uni_fines->sum('record_amount') }}</h4>
+              <span class="">TOTAL FINE</span>
             </div>
           </div>
         </div>
@@ -346,17 +350,17 @@
 
     <div class="row">
       <div class="col-md-12">
-        <div class="box box-success">
-          <div class="box-footer no-paddings">
-            <div class="description-block">
-              <h3 class="description-header">&#8369;{{ $uni_fines->sum('record_amount') + $total }}</h3>
-              <span class="description-text">GRAND TOTAL</span>
+        <div class="card card-success">
+          <div class="card-footer no-paddings">
+            <div class="text-center">
+              <h4 class="m-0">&#8369;{{ $uni_fines->sum('record_amount') + $total }}</h4>
+              <span class="">GRAND TOTAL</span>
             </div>
 
           </div>
         </div>
       </div>
     </div>
-    </section
+  </div>
   @endguest
   @endsection

@@ -8,8 +8,8 @@ use App\Students;
 use App\Events;
 use App\History;
 use Carbon\Carbon;
-use Notify;
 use Validator;
+use App\SchoolStatus;
 
 class RecordController extends Controller
 {
@@ -78,7 +78,8 @@ class RecordController extends Controller
                 $history->save();
 
                 $record->save();
-                Notify::info('You have Signed In/Out Successfully','Success!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-ok']);
+
+                alert()->success('signed In/Out', 'Successfully')->toToast('top');
                 return redirect('/');
               }
               else{
@@ -91,13 +92,13 @@ class RecordController extends Controller
 
                 $history->save();
 
-                Notify::error('You have Signed In/Out multiple times!','Duplicate!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-remove']);
+                alert()->error('Duplicate', 'Sign In/Out')->toToast('top');
                 return redirect('/');
               }
 
             }
             else{
-              Notify::error('Student is not found in the database!','Student not found!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-remove']);
+              alert()->error('There is no Event', 'Today')->toToast('top');
               //Redirect page
               return redirect('/');
             }
@@ -115,7 +116,8 @@ class RecordController extends Controller
           $history->semester = $status->semester;
 
           $history->save();
-          Notify::error('Theres no event today.','No Event!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-remove']);
+          
+          alert()->error('There is no Event', 'Today')->toToast('top');
           return redirect('/');
         }
         else{
@@ -126,7 +128,8 @@ class RecordController extends Controller
           $history->semester = $status->semester;
 
           $history->save();
-          Notify::error('Theres no event today.','No Event!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-remove']);
+
+          alert()->error('There is no Event', 'Today')->toToast('top');
           return redirect('/');
         }
       }
@@ -143,7 +146,8 @@ class RecordController extends Controller
 
         $history->save();
 
-        Notify::error('You cant Sign In/Out in this time.','No Schedule!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-remove']);
+        alert()->error('You cannot sign in/out on this time', '!')->toToast('top');
+        toast('You cannot sign in/out on this time!','error','top-right');
         return redirect('/');
       }else{
         $history = new History;
@@ -154,7 +158,7 @@ class RecordController extends Controller
 
         $history->save();
 
-        Notify::error('You cant Sign In/Out in this time.','No Schedule!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-remove']);
+        alert()->error('You cannot sign in/out on this time', '!')->toToast('top');
         return redirect('/');
       }
     }
@@ -215,8 +219,6 @@ class RecordController extends Controller
 
     $record->save();
 
-    Notify::success('Student Deleted Successfully','Success!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-ok']);
-
     //Redirect page
     return redirect()->route('uniform.index');
   }
@@ -229,16 +231,16 @@ class RecordController extends Controller
   */
   public function destroy($id)
   {
-    $event = Records::find($id);
-    $event->delete();
+    $record = Records::find($id);
+    $record->delete();
 
-    Notify::success('Student Deleted Successfully','Success!')->override(['delay' => '2000', 'animate_speed' => 'normal', 'width' => '340px', 'icon' => 'glyphicon glyphicon-ok']);
     return back();
   }
 
   public function uniformIndex()
   {
-    $uniforms = Records::where('record_title', 'Uniform')->paginate(10);
+    $status = SchoolStatus::first();
+    $uniforms = Records::where('record_title', 'Uniform')->where('school_year', $status->school_year)->where('semester', $status->semester)->get();
 
     return view('records.uniformIndex', ['uniforms' => $uniforms]);
   }

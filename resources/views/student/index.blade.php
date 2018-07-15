@@ -1,4 +1,5 @@
-@extends('layouts.app') @section('content')
+@extends('layouts.app') 
+@section('content')
 <div class="content">
   <div class="row">
     <div class="col-md-12">
@@ -9,7 +10,7 @@
           <a href="{{ url('student/create') }}" class="btn btn-default btn-link btn-icon" data-toggle="tooltip" title="Add Student">
             <i class="fa fa-plus" aria-hidden="true"></i>
           </a>
-          <a href="" class="btn btn-default btn-link btn-icon" data-toggle="tooltip" title="Print Master List">
+          <a href="{{ route('student.master') }}" class="btn btn-default btn-link btn-icon" data-toggle="tooltip" title="Student Master List">
             <i class="fa fa-user" aria-hidden="true"></i>
           </a>
           <a href="" class="btn btn-default btn-link btn-icon" data-toggle="tooltip" title="Print Master List">
@@ -78,20 +79,21 @@
                 <td class="text-center">{{$student->stud_year}} Year</td>
                 <td class="text-center">&#8369;{{$student->stud_fines}}</td>
                 <td class="text-center">
-                  <a href="{{ route('student.uniform', ['id' => $student->stud_id]) }}" class="btn btn-default btn-link btn-icon btn-sm like"
+                  <a href="{{ route('student.addUniformFine', ['id' => $student->stud_id]) }}" class="btn btn-default btn-link btn-icon btn-sm like"
                     data-toggle="tooltip" title="Add Student Uniform Fines">
                     <i class="fa fa-user-o" aria-hidden="true"></i>
-                  </a>
-                  {{ Form::open(['method' => 'GET', 'style'=>'display:inline-block', 'action' => ['StudentController@edit', $student->stud_id]])
-                  }} {{Form::button('
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn btn-primary btn-link btn-icon btn-sm like', 'data-toggle'
-                  => 'tooltip', 'title' => 'Edit Student'))}} {{ Form::close() }} {{ Form::open(['method' => 'GET', 'style'=>'display:inline-block',
-                  'action' => ['StudentController@report', $student->stud_id]]) }} {{Form::button('
-                  <i class="fa fa-table" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn btn-success btn-link btn-icon btn-sm like', 'data-toggle'
-                  => 'tooltip', 'title' => 'Show Student Report'))}} {{ Form::close() }} {{ Form::open(['method' => 'DELETE',
-                  'style'=>'display:inline-block', 'action' => ['StudentController@destroy', $student->stud_id]]) }} {{Form::button('
-                  <i class="fa fa-trash" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-link btn-icon btn-sm like', 'data-toggle'
-                  => 'tooltip', 'title' => 'Delete Student'))}} {{ Form::close() }}
+                  </a> {{ Form::open(['method' => 'GET', 'style'=>'display:inline-block', 'action' => ['StudentController@edit',
+                  $student->stud_id]]) }} {{Form::button('
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn btn-primary
+                  btn-link btn-icon btn-sm like', 'data-toggle' => 'tooltip', 'title' => 'Edit Student'))}} {{ Form::close()
+                  }} {{ Form::open(['method' => 'GET', 'style'=>'display:inline-block', 'action' => ['StudentController@report',
+                  $student->stud_id]]) }} {{Form::button('
+                  <i class="fa fa-table" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn btn-success
+                  btn-link btn-icon btn-sm like', 'data-toggle' => 'tooltip', 'title' => 'Show Student Report'))}} {{ Form::close()
+                  }} {{ Form::open(['method' => 'DELETE', 'style'=>'display:inline-block', 'action' => ['StudentController@destroy',
+                  $student->stud_id]]) }} {{Form::button('
+                  <i class="fa fa-trash" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-link
+                  btn-icon btn-sm like', 'data-toggle' => 'tooltip', 'title' => 'Delete Student'))}} {{ Form::close() }}
                 </td>
               </tr>
               @empty
