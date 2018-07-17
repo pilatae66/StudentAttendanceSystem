@@ -16,7 +16,7 @@
                   <i class="nc-icon nc-tag-content" aria-hidden="true"></i>
                 </span>
               </div>
-              {{Form::text('stud_id', '', ['class'=>'form-control', 'placeholder' => 'ID Number','id' => 'id'])}}
+              {{Form::text('stud_id', '', ['class'=>'form-control', 'placeholder' => 'ID Number','id' => 'id', 'autofocus'=> 'autofocus'])}}
               @if ($errors->has('stud_id'))
               <label for="stud_id" class="error">{{ $errors->first('stud_id') }}</label>
               @endif

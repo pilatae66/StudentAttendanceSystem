@@ -6,11 +6,11 @@
     <div class="logo">
       <a href="#" class="simple-text logo-mini">
         <div class="logo-image-small">
-          <img src="{{ asset('images/logo.png') }}">
+          <img src="{{ asset('images/CCS.png') }}">
         </div>
       </a>
       <a href="#" class="simple-text logo-normal">
-        Creative Tim
+        CCSSAS
         <!-- <div class="logo-image-big">
           <img src="../assets/img/logo-big.png">
         </div> -->
@@ -19,12 +19,12 @@
     <div class="sidebar-wrapper">
       <div class="user">
         <div class="photo">
-          <img src="{{ asset('images/logo.png') }}" />
+          <img src="{{ asset('images/CCS.png') }}" />
         </div>
         <div class="info">
           <a data-toggle="collapse" href="#collapseExample" class="collapsed">
             <span>
-              Chet Faker
+              {{ Auth::user()->fullName }}
               <b class="caret"></b>
             </span>
           </a>
@@ -45,7 +45,7 @@
               </a>
               
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-              <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
               </form>
             </li>
           </ul>
@@ -85,49 +85,49 @@
         </div>
       </li>
       <li class="{{ Request::path() == 'contribution' ? 'active' : '' ||  Request::path() == 'fines' ? 'active' : '' ||  Request::path() == 'uniform' ? 'active' : ''  }}">
-          <a data-toggle="collapse" href="#payables">
-            <i class="nc-icon nc-credit-card"></i>
-            <p>
-              Payables
-              <b class="caret"></b>
-            </p>
-          </a>
-          <div class="collapse " id="payables">
-            <ul class="nav">
-              <li>
-                <a href="{{ route('cont.index') }}">
-                  <span class="sidebar-mini-icon"><i class="nc-icon nc-box"></i></span>
-                  <span class="sidebar-normal"> Contribution </span>
-                </a>
-              </li>
-              <li>
-                <a href="{{ route('uniform.index') }}">
-                  <span class="sidebar-mini-icon"><i class="nc-icon nc-circle-10"></i></span>
-                  <span class="sidebar-normal"> Uniform </span>
-                </a>
-              </li>
-              <li>
-                  <a href="{{ route('fines.index') }}">
-                    <span class="sidebar-mini-icon"><i class="nc-icon nc-money-coins"></i></span>
-                    <span class="sidebar-normal"> Fines </span>
-                  </a>
-                </li>
-            </ul>
-          </div>
-        </li>
-        <li class="{{ Request::path() == 'history' ? 'active' : '' }}">
-            <a href="{{ url('history') }}">
-              <i class="nc-icon nc-refresh-69"></i>
-              <p>History</p>
-            </a>
-          </li>
-          
-        <li class="{{ Request::path() == 'payment' ? 'active' : '' }}">
-            <a href="{{ url('payment') }}">
-              <i class="nc-icon nc-money-coins"></i>
-              <p>Payment</p>
-            </a>
-          </li>
+        <a data-toggle="collapse" href="#payables">
+          <i class="nc-icon nc-credit-card"></i>
+          <p>
+            Payables
+            <b class="caret"></b>
+          </p>
+        </a>
+        <div class="collapse " id="payables">
+          <ul class="nav">
+            <li>
+              <a href="{{ route('cont.index') }}">
+                <span class="sidebar-mini-icon"><i class="nc-icon nc-box"></i></span>
+                <span class="sidebar-normal"> Contribution </span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('uniform.index') }}">
+                <span class="sidebar-mini-icon"><i class="nc-icon nc-circle-10"></i></span>
+                <span class="sidebar-normal"> Uniform </span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('fines.index') }}">
+                <span class="sidebar-mini-icon"><i class="nc-icon nc-money-coins"></i></span>
+                <span class="sidebar-normal"> Fines </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="{{ Request::path() == 'history' ? 'active' : '' }}">
+        <a href="{{ url('history') }}">
+          <i class="nc-icon nc-refresh-69"></i>
+          <p>History</p>
+        </a>
+      </li>
+      
+      <li class="{{ Request::path() == 'payment' ? 'active' : '' }}">
+        <a href="{{ url('payment') }}">
+          <i class="nc-icon nc-money-coins"></i>
+          <p>Payment</p>
+        </a>
+      </li>
     </ul>
   </div>
 </div>

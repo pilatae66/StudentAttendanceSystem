@@ -246,7 +246,7 @@ class StudentController extends Controller
       $history->save();
       
       alert()->success('Student Registered', 'Successfully')->toToast('top');
-      return redirect('student');
+      return redirect()->route('student.master');
     }
     
     /**
@@ -317,7 +317,7 @@ class StudentController extends Controller
         $history->save();
         
         alert()->success('Student Updated', 'Successfully')->toToast('top');
-        return redirect('/student');
+        return redirect()->route('student.master');
         
       }
       

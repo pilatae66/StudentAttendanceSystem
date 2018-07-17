@@ -21,7 +21,7 @@ class PaymentController extends Controller
     public function index()
     {
         $status = SchoolStatus::first();
-        $payments = Payment::all();
+        $payments = Payment::where('school_year', $status->school_year)->where('semester', $status->semester)->get();
     
         return view('payment.index', compact('payments'));
     }

@@ -6,6 +6,9 @@
 			<div class="card">
 				<div class="card-header">
 					<h4 class="card-title">Student List</h4>
+					<a href="{{ url('student/create') }}" class="btn btn-default btn-link btn-icon" data-toggle="tooltip" title="Add Student">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </a>
 				</div>
 				<div class="card-body">
 					<table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">

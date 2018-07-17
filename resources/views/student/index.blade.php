@@ -6,10 +6,6 @@
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Student List</h4>
-
-          <a href="{{ url('student/create') }}" class="btn btn-default btn-link btn-icon" data-toggle="tooltip" title="Add Student">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-          </a>
           <a href="{{ route('student.master') }}" class="btn btn-default btn-link btn-icon" data-toggle="tooltip" title="Student Master List">
             <i class="fa fa-user" aria-hidden="true"></i>
           </a>
@@ -26,9 +22,6 @@
                 </th>
                 <th class="text-center">
                   Name
-                </th>
-                <th class="text-center">
-                  Email
                 </th>
                 <th class="text-center">
                   Course
@@ -53,9 +46,6 @@
                   Name
                 </th>
                 <th class="text-center">
-                  Email
-                </th>
-                <th class="text-center">
                   Course
                 </th>
                 <th class="text-center">
@@ -74,7 +64,6 @@
               <tr>
                 <td class="text-center">{{$student->stud_id}}</td>
                 <td>{{$student->lname}}, {{$student->fname}}</td>
-                <td>{{$student->email == "" ? 'No Email' : $student->email }}</td>
                 <td>{{$student->stud_course}}</td>
                 <td class="text-center">{{$student->stud_year}} Year</td>
                 <td class="text-center">&#8369;{{$student->stud_fines}}</td>

@@ -277,6 +277,7 @@
           [10, 25, 50, "All"]
         ],
         responsive: true,
+        "order": [],
         language: {
           search: "_INPUT_",
           searchPlaceholder: "Search records",

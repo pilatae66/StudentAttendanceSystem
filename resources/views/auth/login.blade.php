@@ -100,7 +100,7 @@
   </nav>
   <!-- End Navbar -->
   <div class="wrapper wrapper-full-page ">
-    <div class="full-page section-image" filter-color="black" data-image="img/bg/fabio-mangione.jpg">
+    <div class="full-page section-image" filter-color="black" data-image="{{ asset('images/DSC_0472.JPG') }}">
       <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
       <div class="content">
         <div class="container">
