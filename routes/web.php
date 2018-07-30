@@ -80,3 +80,8 @@ Route::delete('contribution/{id}', 'ContributionController@destroy')->name('cont
 Route::get('uniform', 'RecordController@uniformIndex')->name('uniform.index');
 
 Route::get('payment', 'PaymentController@index')->name('payment.index');
+
+Route::get('payment/{id}', 'PaymentController@create')->name('payment.create');
+
+Route::post('payment', 'PaymentController@store')->name('payment.store');
+

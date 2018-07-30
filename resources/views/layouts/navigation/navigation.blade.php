@@ -1,5 +1,5 @@
 <div class="wrapper ">
-  <div class="sidebar" data-color="brown" data-active-color="success">
+  <div class="sidebar" data-color="green" data-active-color="success">
     <!--
       Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
@@ -67,15 +67,15 @@
             <b class="caret"></b>
           </p>
         </a>
-        <div class="collapse " id="user">
+        <div class="collapse {{ Request::path() == 'student' ? 'show' : '' || Request::path() == 'admin' ? 'show' : '' }}" id="user">
           <ul class="nav">
-            <li>
+            <li class="{{ Request::path() == 'student' ? 'active' : '' }}">
               <a href="{{ route('student.index') }}">
                 <span class="sidebar-mini-icon"><i class="nc-icon nc-hat-3"></i></span>
                 <span class="sidebar-normal"> Student </span>
               </a>
             </li>
-            <li>
+            <li class="{{ Request::path() == 'admin' ? 'active' : '' }}">
               <a href="{{ route('admin.index') }}">
                 <span class="sidebar-mini-icon"><i class="nc-icon nc-badge"></i></span>
                 <span class="sidebar-normal"> Admin </span>
@@ -92,21 +92,21 @@
             <b class="caret"></b>
           </p>
         </a>
-        <div class="collapse " id="payables">
+        <div class="collapse {{ Request::path() == 'contribution' ? 'show' : '' ||  Request::path() == 'fines' ? 'show' : '' ||  Request::path() == 'uniform' ? 'show' : ''  }}" id="payables">
           <ul class="nav">
-            <li>
+            <li class="{{ Request::path() == 'contribution' ? 'active' : '' }}">
               <a href="{{ route('cont.index') }}">
                 <span class="sidebar-mini-icon"><i class="nc-icon nc-box"></i></span>
                 <span class="sidebar-normal"> Contribution </span>
               </a>
             </li>
-            <li>
+            <li class="{{ Request::path() == 'uniform' ? 'active' : '' }}">
               <a href="{{ route('uniform.index') }}">
                 <span class="sidebar-mini-icon"><i class="nc-icon nc-circle-10"></i></span>
                 <span class="sidebar-normal"> Uniform </span>
               </a>
             </li>
-            <li>
+            <li class="{{ Request::path() == 'fines' ? 'active' : '' }}">
               <a href="{{ route('fines.index') }}">
                 <span class="sidebar-mini-icon"><i class="nc-icon nc-money-coins"></i></span>
                 <span class="sidebar-normal"> Fines </span>

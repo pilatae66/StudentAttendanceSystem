@@ -22,7 +22,7 @@
 
             <div class="form-group">
               <div class=" col-md-6 col-md-offset-4">
-                {{Form::submit('Submit', ['class'=>'btn btn-success'])}}
+                {{Form::submit('Submit', ['class' => 'btn btn-success', 'data-toggle' => 'tooltip', 'title' => 'Edit Fines'])}}
               </div>
             </div>
             {{ Form::close() }}

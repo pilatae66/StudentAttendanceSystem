@@ -71,12 +71,20 @@
                   <a href="{{ route('student.addUniformFine', ['id' => $student->stud_id]) }}" class="btn btn-default btn-link btn-icon btn-sm like"
                     data-toggle="tooltip" title="Add Student Uniform Fines">
                     <i class="fa fa-user-o" aria-hidden="true"></i>
-                  </a> {{ Form::open(['method' => 'GET', 'style'=>'display:inline-block', 'action' => ['StudentController@edit',
-                  $student->stud_id]]) }} {{Form::button('
+                  </a> 
+                  <a href="{{ route('payment.create', ['id' => $student->stud_id]) }}" class="btn btn-success btn-link btn-icon btn-sm like"
+                    data-toggle="tooltip" title="Add Payment">
+                    <i class="fa fa-money" aria-hidden="true"></i>
+                  </a> 
+                  {{ Form::open(['method' => 'GET', 'style'=>'display:inline-block', 'action' => ['StudentController@edit',
+                  $student->stud_id]]) }} 
+                  {{Form::button('
                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn btn-primary
                   btn-link btn-icon btn-sm like', 'data-toggle' => 'tooltip', 'title' => 'Edit Student'))}} {{ Form::close()
-                  }} {{ Form::open(['method' => 'GET', 'style'=>'display:inline-block', 'action' => ['StudentController@report',
-                  $student->stud_id]]) }} {{Form::button('
+                  }}
+                  {{ Form::open(['method' => 'GET', 'style'=>'display:inline-block', 'action' => ['StudentController@report',
+                  $student->stud_id]]) }} 
+                  {{Form::button('
                   <i class="fa fa-table" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn btn-success
                   btn-link btn-icon btn-sm like', 'data-toggle' => 'tooltip', 'title' => 'Show Student Report'))}} {{ Form::close()
                   }} {{ Form::open(['method' => 'DELETE', 'style'=>'display:inline-block', 'action' => ['StudentController@destroy',

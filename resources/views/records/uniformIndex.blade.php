@@ -36,7 +36,7 @@
                   <td>{{$uniform->created_at->format('F d, Y || h:i a')}}</td>
                   <td>
                   {{ Form::open(['method' => 'DELETE', 'style'=>'display:inline-block', 'action' => ['RecordController@destroy', $uniform->record_id]]) }}
-                  {{ Form::button('<i class="nc-icon nc-basket"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-link'))}}
+                  {{ Form::button('<i class="nc-icon nc-basket"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-link', 'data-toggle' => 'tooltip', 'title' => 'Delete Fine', 'data-placement' => 'top'))}}
                   {{ Form::close() }}
                 </td>
               </tr>
