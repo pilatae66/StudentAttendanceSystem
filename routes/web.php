@@ -13,6 +13,10 @@
 
 Auth::routes();
 
+Route::get('/', function() {
+    return redirect()->route('login');
+});
+
 Route::get('dashboard', 'HomeController@index')->name('dashboard');
 
 Route::get('admin', 'AdminController@index')->name('admin.index');
@@ -31,7 +35,7 @@ Route::resource('fines', 'FinesController');
 
 Route::resource('history', 'HistoryController');
 
-Route::get('/', 'AttendanceController@sign')->middleware('web');
+Route::get('/attend', 'AttendanceController@sign')->middleware('web');
 
 Route::get('schedules/{id}/create', 'ScheduleController@create');
 

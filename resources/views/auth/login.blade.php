@@ -21,34 +21,9 @@
   <!-- CSS Files -->
   <link href="{{ asset('css/new/bootstrap.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('css/new/paper-dashboard.min.css?v=2.0.1') }}" rel="stylesheet" />
-  <!-- Extra details for Live View on GitHub Pages -->
-  <!-- Google Tag Manager -->
-  <script>
-    (function(w, d, s, l, i) {
-      w[l] = w[l] || [];
-      w[l].push({
-        'gtm.start': new Date().getTime(),
-        event: 'gtm.js'
-      });
-      var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s),
-        dl = l != 'dataLayer' ? '&l=' + l : '';
-      j.async = true;
-      j.src =
-        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-      f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-NKDMSK6');
-  </script>
-  <!-- End Google Tag Manager -->
 </head>
 
 <body class="login-page">
-  <!-- Extra details for Live View on GitHub Pages -->
-  <!-- Google Tag Manager (noscript) -->
-  <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-  </noscript>
-  <!-- End Google Tag Manager (noscript) -->
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
     <div class="container">
@@ -60,7 +35,7 @@
             <span class="navbar-toggler-bar bar3"></span>
           </button>
         </div>
-        <a class="navbar-brand" href="#pablo">Paper Dashboard 2 PRO</a>
+        <a class="navbar-brand" href="#pablo">CCS STUDENT ATTENDANCE SYSTEM</a>
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -69,24 +44,9 @@
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navigation">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a href="../dashboard.html" class="nav-link">
-              <i class="nc-icon nc-layout-11"></i> Dashboard
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a href="register.html" class="nav-link">
-              <i class="nc-icon nc-book-bookmark"></i> Register
-            </a>
-          </li>
           <li class="nav-item  active ">
             <a href="login.html" class="nav-link">
               <i class="nc-icon nc-tap-01"></i> Login
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a href="user.html" class="nav-link">
-              <i class="nc-icon nc-satisfied"></i> User
             </a>
           </li>
           <li class="nav-item ">
@@ -146,22 +106,21 @@
             <nav class="footer-nav">
               <ul>
                 <li>
-                  <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>
+                  <a href="#" target="_blank">Facebook</a>
                 </li>
                 <li>
-                  <a href="http://blog.creative-tim.com/" target="_blank">Blog</a>
+                  <a href="#" target="_blank">Google+</a>
                 </li>
                 <li>
-                  <a href="https://www.creative-tim.com/license" target="_blank">Licenses</a>
+                  <a href="#" target="_blank">Instagram</a>
                 </li>
               </ul>
             </nav>
             <div class="credits ml-auto">
               <span class="copyright">
-                ©
-                <script>
-                  document.write(new Date().getFullYear())
-                </script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
+                © 2017 - 
+                <script>document.write(new Date().getFullYear())
+                </script>, made with <i class="fa fa-heart heart"></i> by LonerWeb
               </span>
             </div>
           </div>

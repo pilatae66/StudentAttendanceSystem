@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Schedule;
 use App\History;
+use App\Students;
+use App\SchoolStatus;
+use App\Fines;
 use Carbon\Carbon;
 use Auth;
 use Notify;
@@ -67,7 +70,14 @@ class ScheduleController extends Controller
       return back()->withInput();
     }
     else{
+      $fines = Fines::first();
       $status = SchoolStatus::first();
+      $students = Students::where('isActive', '1')->get();
+
+      foreach ($students as $key => $student) {
+        $student->stud_fines += $fines->fine_amount;
+        $student->save();
+      }
 
       $history = new History;
       $history->incident = " Schedule for ".$schedule->event->event_name." Added ";
@@ -164,7 +174,14 @@ class ScheduleController extends Controller
     $status = SchoolStatus::first();
     $schedule = Schedule::find($id);
 
-    $status = SchoolStatus::first();
+    $status = SchoolStatus::first(); 
+    $fines = Fines::first();
+    $students = Students::where('isActive', '1')->get();
+
+    foreach ($students as $key => $student) {
+      $student->stud_fines -= $fines->fine_amount;
+      $student->save();
+    }
 
     $history = new History;
     $history->incident = " Schedule for ".$schedule->event->event_name." Deleted";

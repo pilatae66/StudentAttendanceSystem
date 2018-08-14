@@ -24,7 +24,7 @@ class PaymentController extends Controller
     public function index()
     {
         $status = SchoolStatus::first();
-        $payments = Payment::where('school_year', $status->school_year)->where('semester', $status->semester)->get();
+        $payments = Payment::where('school_year', $status->school_year)->where('semester', $status->semester)->orderBy('created_at', 'DEC')->get();
     
         return view('payment.index', compact('payments'));
     }
@@ -39,16 +39,25 @@ class PaymentController extends Controller
         $status = SchoolStatus::first();
         // return $id;
         $contributions = Contribution::where('cont_title','!=', 'Uniform')->where('semester', $status->semester)->where('school_year', $status->school_year)->get();
+        $contributes = Contribution::where('cont_title','!=', 'Uniform')->where('semester', $status->semester)->where('school_year', $status->school_year)->get();
         // return $contributions;
         $payments = Payment::where('stud_id', $id)->where('semester', $status->semester)->where('school_year', $status->school_year)->get();
         // return $payments;
         $pay = [];
         foreach ($contributions as $key => $contribution) {
             $pay[$key] = $contribution->cont_amount - $payments->where('pay_type', $contribution->cont_title)->sum('pay_amount');
+            // print($contribution->cont_amount - $payments->where('pay_type', $contribution->cont_title)->sum('pay_amount'). " ");
+            if($pay[$key] == 0){
+                // print($key);
+                // print($contribution->cont_title);
+                $contributions->forget($key);
+            }
+
         }
         // dd($pay);
+        // return $contributes;
         $student = Students::where('stud_id', $id)->first();
-        return view('payment.create', compact('student', 'contributions', 'pay'));
+        return view('payment.create', compact('student', 'contributions', 'pay', 'contributes'));
     }
 
     /**

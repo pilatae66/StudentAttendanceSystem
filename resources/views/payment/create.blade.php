@@ -54,7 +54,7 @@
 					<table class="table table-bordered">
 						<thead>
 							<tr>
-								@foreach ($contributions as $item)
+								@foreach ($contributes as $item)
 									<th>{{ $item->cont_title }}</th>
 								@endforeach
 							</tr>
@@ -62,13 +62,13 @@
 						<tbody>
 							<tr>
 								@foreach ($pay as $item)
-									<td>{{ $item }}</td>
+									<td>{{ $item == 0 ? 'Paid' : $item }}</td>
 								@endforeach
 							</tr>
 						</tbody>
 						<tfoot>
 							<tr>
-								@foreach ($contributions as $item)
+								@foreach ($contributes as $item)
 									<th>{{ $item->cont_title }}</th>
 								@endforeach
 							</tr>

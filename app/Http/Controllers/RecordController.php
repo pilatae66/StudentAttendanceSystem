@@ -8,6 +8,7 @@ use App\Students;
 use App\Events;
 use App\History;
 use Carbon\Carbon;
+use App\Fines;
 use Validator;
 use App\SchoolStatus;
 
@@ -51,6 +52,7 @@ class RecordController extends Controller
       'id' => 'required'
     ]);
     $status = SchoolStatus::first();
+    $fines = Fines::first();
 
     if($request->submitButton == 'sign'){
       if(!is_null($request->event_id)){
@@ -69,17 +71,23 @@ class RecordController extends Controller
 
 
                 $student = Students::where('stud_id', '=', $request->input('id'))->first();
+                $student->stud_fines -= $fines->fine_amount;
                 $history = new History;
                 $history->incident = $student->stud_fname." ".$student->stud_lname." Signed ".$request->sign_type;
                 $history->full_name = $student->stud_fname." ".$student->stud_lname;
                 $history->school_year = $status->school_year;
                 $history->semester = $status->semester;
 
+                // return $student;
+
                 $history->save();
+
+                $student->save();
 
                 $record->save();
 
-                alert()->success('signed In/Out', 'Successfully')->toToast('top');
+                alert()->success('Signed In/Out Successfully', '!')->toToast('top');
+
                 return redirect('/');
               }
               else{
@@ -92,13 +100,13 @@ class RecordController extends Controller
 
                 $history->save();
 
-                alert()->error('Duplicate', 'Sign In/Out')->toToast('top');
+                alert()->error('Duplicate Sign In/Out', '!')->toToast('top');
                 return redirect('/');
               }
 
             }
             else{
-              alert()->error('There is no Event', 'Today')->toToast('top');
+              alert()->error('There is no Event Today', '!')->toToast('top');
               //Redirect page
               return redirect('/');
             }
@@ -117,7 +125,7 @@ class RecordController extends Controller
 
           $history->save();
           
-          alert()->error('There is no Event', 'Today')->toToast('top');
+          alert()->error('There is no Event Today', '!')->toToast('top');
           return redirect('/');
         }
         else{
@@ -129,7 +137,7 @@ class RecordController extends Controller
 
           $history->save();
 
-          alert()->error('There is no Event', 'Today')->toToast('top');
+          alert()->error('There is no Event Today', '!')->toToast('top');
           return redirect('/');
         }
       }

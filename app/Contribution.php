@@ -15,5 +15,4 @@ class Contribution extends Model
       'school_year',
       'semester',
     ];
-
 }

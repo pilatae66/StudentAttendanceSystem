@@ -37,7 +37,13 @@
                   <span class="sidebar-normal">My Profile</span>
                 </a>
               </li>
-              <li><a class="dropdown-item" href="{{ route('logout') }}"
+              <li>
+                <a href="#">
+                  <span class="sidebar-mini-icon"> <i class="nc-icon nc-key-25"></i></span>
+                  <span class="sidebar-normal">Lock</span>
+                </a>
+              </li>
+              <li><a href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
                 <span class="sidebar-mini-icon"><i class="nc-icon nc-button-power"></i></span>
@@ -83,6 +89,12 @@
             </li>
           </ul>
         </div>
+      </li>
+      <li class="{{ Request::path() == 'event' ? 'active' : '' }}">
+        <a href="{{ url('event') }}">
+          <i class="fa fa-star-o"></i>
+          <p>Events</p>
+        </a>
       </li>
       <li class="{{ Request::path() == 'contribution' ? 'active' : '' ||  Request::path() == 'fines' ? 'active' : '' ||  Request::path() == 'uniform' ? 'active' : ''  }}">
         <a data-toggle="collapse" href="#payables">

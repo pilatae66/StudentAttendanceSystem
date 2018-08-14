@@ -1,58 +1,44 @@
 @extends('layouts.app')
-@section('title')
-  Add Event
-@endsection
 @section('content')
-  <section class="content-header">
-     <h1>
-       Add Event
-       <small></small>
-     </h1>
-     <ol class="breadcrumb">
-       <li><a href="{{ url('dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-       <li><a href="{{ url('event') }}">Event</a></li>
-       <li class="active"><a href="">Add Event</a></li>
-     </ol>
-   </section>
-<section class="content">
+<div class="content">
     <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <div class="box box-success box-solid">
-          <div class="box-header">
-              <h3 class="box-title">Add Event</h3>
+      <div class="col-md-8 mr-auto ml-auto">
+        <div class="card">
+          <div class="card-header">
+              <h4 class="card-title">Add Event</h4>
            </div>
-          <div class="box-body"><br>
+          <div class="card-body"><br>
             {{ Form::open(array('url'=>'event', 'method'=>'post', 'class'=>'form-horizontal')) }}
 
-            <div class="form-group{{ $errors->has('eventname') ? ' has-error' : '' }}">
-              <div class="col-md-6 col-md-offset-3 input-group">
-                <span class="input-group-addon" style="background-color:#5cb85c;"><i style="color:white;" class="fa fa-star-o" aria-hidden="true"></i></span>
+            <div class="col-md-6 mr-auto ml-auto">
+              <div class="input-group{{ $errors->has('eventname') ? ' has-danger' : '' }}">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                  </div>
+                </div>
                 {{Form::text('eventname', '', ['class'=>'form-control', 'placeholder' => 'Event Name'])}}
-              </div>
-              <div class="col-md-6 col-md-offset-3">
                 @if ($errors->has('eventname'))
-                  <span class="help-block">
-                    <strong>{{ $errors->first('eventname') }}</strong>
-                  </span>
+                <label for="eventname" class="error">{{ $errors->first('eventname') }}</label>
                 @endif
               </div>
             </div>
 
-            <div class="form-group{{ $errors->has('eventdate') ? ' has-error' : '' }}">
-              <div class="col-md-6 col-md-offset-3 input-group">
-                <span class="input-group-addon" style="background-color:#5cb85c;"><i style="color:white;" class="fa fa-calendar" aria-hidden="true"></i></span>
+            <div class="col-md-6 mr-auto ml-auto">
+                <div class="input-group{{ $errors->has('eventdate') ? ' has-danger' : '' }}">
+                <span class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                  </div>
+                </span>
                 {{Form::date('eventdate', '', ['class'=>'form-control'])}}
-              </div>
-              <div class="col-md-6 col-md-offset-3">
                 @if ($errors->has('eventdate'))
-                  <span class="help-block">
-                    <strong>{{ $errors->first('eventdate') }}</strong>
-                  </span>
+                <label for="eventdate" class="error">{{ $errors->first('eventdate') }}</label>
                 @endif
               </div>
             </div>
             <div class="form-group">
-              <div class=" col-md-6 col-md-offset-3">
+              <div class=" col-md-6 mr-auto ml-auto">
                 {{Form::submit('Submit', ['class'=>'btn btn-success'])}}
               </div>
             </div>
@@ -62,5 +48,5 @@
       </div>
     </div>
   </div>
-</section>
+</div>
 @endsection

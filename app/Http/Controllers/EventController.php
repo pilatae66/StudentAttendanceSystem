@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Events;
 use App\History;
+use App\SchoolStatus;
+use App\Fines;
+use App\Students;
+use App\Records;
 use Auth;
-use Notify;
 
 class EventController extends Controller
 {
@@ -21,7 +24,8 @@ class EventController extends Controller
   */
   public function index()
   {
-    $events = Events::orderBy('event_date', 'asc')->paginate(10);
+    $status = SchoolStatus::first();
+    $events = Events::where('semester', $status->semester)->where('school_year', $status->school_year)->orderBy('event_date', 'asc')->paginate(10);
 
     return view('event.index', ['events' => $events]);
   }
@@ -140,7 +144,21 @@ class EventController extends Controller
   */
   public function destroy($id)
   {
+    $status = SchoolStatus::first();
+    $fines = Fines::first();
     $event = Events::find($id);
+    $schedule_count = $event->schedule->count();
+
+    
+    $students = Students::where('isActive', '1')->get();
+
+    foreach ($students as $key => $student) {
+      $student_record_count = Records::where('stud_id', $student->stud_id)->where('event_id', $id)->count();
+      $student->stud_fines -= $fines->fine_amount * ($schedule_count - $student_record_count);
+      $student->save();
+    }
+
+    // return $students;
 
     $history = new History;
     $history->incident = $event->event_name." Event Deleted";
