@@ -16,4 +16,3 @@ cd vendor/laravel/framework/src/Illuminate/Foundation/Auth/
 start notepad AuthenticatesUsers.php
 cd ../../../../../../..
 start CCSSMS.bat
-PAUSE
