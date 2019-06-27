@@ -160,7 +160,7 @@ class ScheduleController extends Controller
 
 
     alert()->success('Schedule Updated', 'Successfully')->toToast('top');     
-    return redirect('event');
+    return redirect("event/{$id}/schedule");
   }
 
   /**

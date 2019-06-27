@@ -80,7 +80,7 @@
                         <i class="nc-icon nc-single-02"></i>
                       </span>
                     </div>
-                    <input type="text" name="id" class="form-control" placeholder="First Name...">
+                    <input type="text" name="id" class="form-control" placeholder="ID Number">
                   </div>
                   <div class="input-group">
                     <div class="input-group-prepend">

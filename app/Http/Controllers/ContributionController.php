@@ -51,7 +51,22 @@ class ContributionController extends Controller
 
   public function edit($id)
   {
-    
+    $contribution = Contribution::find($id);
+    return view('contribution.edit', compact('contribution'));
+  }
+
+  public function update(Contribution $contribution, Request $request)
+  {
+    $this->validate($request, [
+      'cont_title' => 'required',
+      'cont_amount' => 'required',
+    ]);
+
+    $contribution->update($request->all());
+
+
+    alert()->success('Contribution Updated', 'Successfully')->toToast('top');
+    return redirect()->route('cont.index');
   }
 
   public function destroy($id)

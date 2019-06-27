@@ -74,19 +74,29 @@ class PaymentController extends Controller
         ]);
 
         $status = SchoolStatus::first();
+        $cont = Contribution::where('cont_title', $request->pay_type)->first()->cont_amount;
+        $paid = Payment::where('stud_id', $request->stud_id)->where('pay_type', $request->pay_type)->sum('pay_amount');
+        $balance = $cont - $paid;
 
-        $payment = new Payment;
-        $payment->stud_id = $request->stud_id;
-        $payment->pay_type = $request->pay_type;
-        $payment->pay_amount = $request->pay_amount;
-        $payment->pay_to = Auth::user()->id;
-        $payment->semester = $status->semester;
-        $payment->school_year = $status->school_year;
+        if ($balance - $request->pay_amount > 0) {
+            $payment = new Payment;
+            $payment->stud_id = $request->stud_id;
+            $payment->pay_type = $request->pay_type;
+            $payment->pay_amount = $request->pay_amount;
+            $payment->pay_to = Auth::user()->id;
+            $payment->semester = $status->semester;
+            $payment->school_year = $status->school_year;
+    
+            $payment->save();
+    
+            alert()->success('Paid', 'Successfully')->toToast('top');
+            return redirect()->route('student.index');
+        }
+        else{
+            alert()->error('Payment amount is over the balance. Please check table below', 'Error!')->toToast('top');
+            return redirect()->route('payment.create', $request->stud_id);
 
-        $payment->save();
-
-        alert()->success('Paid', 'Successfully')->toToast('top');
-        return redirect()->route('student.index');
+        }
     }
 
     /**

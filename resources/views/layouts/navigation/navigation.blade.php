@@ -38,9 +38,9 @@
                 </a>
               </li>
               <li>
-                <a href="#">
-                  <span class="sidebar-mini-icon"> <i class="nc-icon nc-key-25"></i></span>
-                  <span class="sidebar-normal">Lock</span>
+                <a href="{{ route('register') }}">
+                  <span class="sidebar-mini-icon"> <i class="nc-icon nc-single-02"></i></span>
+                  <span class="sidebar-normal">Register New Admin</span>
                 </a>
               </li>
               <li><a href="{{ route('logout') }}"
@@ -59,13 +59,13 @@
       </div>
     </div>
     <ul class="nav">
-      <li class="{{ Request::path() == 'dashboard' ? 'active' : '' }}">
+      <li class="{{ Request::is('dashboard*') ? 'active' : '' }}">
         <a href="{{ url('dashboard') }}">
           <i class="nc-icon nc-bank"></i>
           <p>Dashboard</p>
         </a>
       </li>
-      <li class="{{ Request::path() == 'student' ? 'active' : '' ||  Request::path() == 'admin' ? 'active' : ''  }}">
+      <li class="{{ Request::is('student*') ? 'active' : '' ||  Request::is('admin*') ? 'active' : ''  }}">
         <a data-toggle="collapse" href="#user">
           <i class="nc-icon nc-single-02"></i>
           <p>
@@ -73,15 +73,15 @@
             <b class="caret"></b>
           </p>
         </a>
-        <div class="collapse {{ Request::path() == 'student' ? 'show' : '' || Request::path() == 'admin' ? 'show' : '' }}" id="user">
+        <div class="collapse {{ Request::is('student*') ? 'show' : '' || Request::is('admin*') ? 'show' : '' }}" id="user">
           <ul class="nav">
-            <li class="{{ Request::path() == 'student' ? 'active' : '' }}">
+            <li class="{{ Request::is('student*') ? 'active' : '' }}">
               <a href="{{ route('student.index') }}">
                 <span class="sidebar-mini-icon"><i class="nc-icon nc-hat-3"></i></span>
                 <span class="sidebar-normal"> Student </span>
               </a>
             </li>
-            <li class="{{ Request::path() == 'admin' ? 'active' : '' }}">
+            <li class="{{ Request::is('admin*') ? 'active' : '' }}">
               <a href="{{ route('admin.index') }}">
                 <span class="sidebar-mini-icon"><i class="nc-icon nc-badge"></i></span>
                 <span class="sidebar-normal"> Admin </span>
@@ -90,13 +90,13 @@
           </ul>
         </div>
       </li>
-      <li class="{{ Request::path() == 'event' ? 'active' : '' }}">
+      <li class="{{ Request::is('event*') || Request::is('schedule*')? 'active' : '' }}">
         <a href="{{ url('event') }}">
           <i class="fa fa-star-o"></i>
           <p>Events</p>
         </a>
       </li>
-      <li class="{{ Request::path() == 'contribution' ? 'active' : '' ||  Request::path() == 'fines' ? 'active' : '' ||  Request::path() == 'uniform' ? 'active' : ''  }}">
+      <li class="{{ Request::is('contribution*') ? 'active' : '' ||  Request::is('fines*') ? 'active' : '' ||  Request::is('uniform*') ? 'active' : ''  }}">
         <a data-toggle="collapse" href="#payables">
           <i class="nc-icon nc-credit-card"></i>
           <p>
@@ -104,21 +104,21 @@
             <b class="caret"></b>
           </p>
         </a>
-        <div class="collapse {{ Request::path() == 'contribution' ? 'show' : '' ||  Request::path() == 'fines' ? 'show' : '' ||  Request::path() == 'uniform' ? 'show' : ''  }}" id="payables">
+        <div class="collapse {{ Request::is('contribution*') ? 'show' : '' ||  Request::is('fines*') ? 'show' : '' ||  Request::is('uniform*') ? 'show' : ''  }}" id="payables">
           <ul class="nav">
-            <li class="{{ Request::path() == 'contribution' ? 'active' : '' }}">
+            <li class="{{ Request::is('contribution*') ? 'active' : '' }}">
               <a href="{{ route('cont.index') }}">
                 <span class="sidebar-mini-icon"><i class="nc-icon nc-box"></i></span>
                 <span class="sidebar-normal"> Contribution </span>
               </a>
             </li>
-            <li class="{{ Request::path() == 'uniform' ? 'active' : '' }}">
+            <li class="{{ Request::is('uniform*') ? 'active' : '' }}">
               <a href="{{ route('uniform.index') }}">
                 <span class="sidebar-mini-icon"><i class="nc-icon nc-circle-10"></i></span>
                 <span class="sidebar-normal"> Uniform </span>
               </a>
             </li>
-            <li class="{{ Request::path() == 'fines' ? 'active' : '' }}">
+            <li class="{{ Request::is('fines*') ? 'active' : '' }}">
               <a href="{{ route('fines.index') }}">
                 <span class="sidebar-mini-icon"><i class="nc-icon nc-money-coins"></i></span>
                 <span class="sidebar-normal"> Fines </span>
@@ -127,14 +127,14 @@
           </ul>
         </div>
       </li>
-      <li class="{{ Request::path() == 'history' ? 'active' : '' }}">
+      <li class="{{ Request::is('history*') ? 'active' : '' }}">
         <a href="{{ url('history') }}">
           <i class="nc-icon nc-refresh-69"></i>
           <p>History</p>
         </a>
       </li>
       
-      <li class="{{ Request::path() == 'payment' ? 'active' : '' }}">
+      <li class="{{ Request::is('payment*') ? 'active' : '' }}">
         <a href="{{ url('payment') }}">
           <i class="nc-icon nc-money-coins"></i>
           <p>Payment</p>

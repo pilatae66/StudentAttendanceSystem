@@ -17,6 +17,8 @@ class CreateHistoriesTable extends Migration
             $table->increments('history_id');
             $table->string('incident');
             $table->string('full_name')->unindexed();
+            $table->string('semester');
+            $table->string('school_year');
             $table->timestamps();
         });
     }

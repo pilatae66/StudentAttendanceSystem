@@ -15,6 +15,7 @@
                 <th>Name</th>
                 <th>Usertype</th>
                 <th>Email</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tfoot>
@@ -23,6 +24,7 @@
                 <th>Name</th>
                 <th>Usertype</th>
                 <th>Email</th>
+                <th>Actions</th>
               </tr>
             </tfoot>
             <tbody>
@@ -32,6 +34,18 @@
                 <td>{{$users->fname}} {{$users->lname}}</td>
                 <td>{{$users->usertype}}</td>
                 <td>{{$users->email}}</td>
+                <td>
+                    {{ Form::open(['method' => 'GET', 'style'=>'display:inline-block', 'action' => ['AdminController@edit',
+                    $users->id]]) }} 
+                    {{Form::button('
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn btn-primary
+                    btn-link btn-icon btn-sm like', 'data-toggle' => 'tooltip', 'title' => 'Edit Student'))}} {{ Form::close()
+                    }}
+                    {{ Form::open(['method' => 'DELETE', 'style'=>'display:inline-block', 'action' => ['AdminController@destroy',
+                    $users->id]]) }} {{Form::button('
+                    <i class="fa fa-trash" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-link
+                    btn-icon btn-sm like', 'data-toggle' => 'tooltip', 'title' => 'Delete Student'))}} {{ Form::close() }}
+                </td>
               </tr>
               @endforeach
             </tbody>

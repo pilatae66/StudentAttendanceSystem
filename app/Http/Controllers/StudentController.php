@@ -91,7 +91,7 @@ class StudentController extends Controller
           'afternoon_out' => " ",
           'evening_in' => " ",
           'evening_out' => " ",
-          'fine' => " ",
+          'fine' => 0,
         );
       }
       for ($i = 0; $i < $event->count(); $i++) {

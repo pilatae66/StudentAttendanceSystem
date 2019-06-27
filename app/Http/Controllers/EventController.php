@@ -108,6 +108,7 @@ class EventController extends Controller
   */
   public function update(Request $request, $id)
   {
+    $status = SchoolStatus::first();
     $this->validate($request, [
       'eventname' => 'required',
       'eventdate' => 'required'

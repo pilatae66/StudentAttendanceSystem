@@ -21,7 +21,17 @@ Route::get('dashboard', 'HomeController@index')->name('dashboard');
 
 Route::get('admin', 'AdminController@index')->name('admin.index');
 
-Route::get('admin/{id}', 'AdminController@show')->name('admin.edit');
+Route::get('admin/{user}', 'AdminController@edit')->name('admin.edit');
+
+Route::patch('admin/{user}', 'AdminController@update')->name('admin.update');
+
+Route::delete('admin/{user}', 'AdminController@destroy')->name('admin.destroy');
+
+Route::get('student/{id}/payment', 'PaymentController@create')->name('payment.create');
+
+Route::get('student/master', 'StudentController@getMasterList')->name('student.master');
+
+Route::get('student/{id}/activate', 'StudentController@activate')->name('student.activate');
 
 Route::resource('student', 'StudentController');
 
@@ -63,9 +73,6 @@ Route::post('guest-password/reset', 'Student\ForgotPasswordController@reset');
 
 Route::get('guest-password/reset/{token}', 'Student\ResetPasswordController@showResetForm')->name('student.auth.pasword.reset');
 
-Route::get('stud/master', 'StudentController@getMasterList')->name('student.master');
-
-Route::get('stud/{id}/activate', 'StudentController@activate')->name('student.activate');
 
 //Contribution Routes
 
@@ -79,13 +86,14 @@ Route::get('contribution/{id}/edit', 'ContributionController@edit')->name('cont.
 
 Route::delete('contribution/{id}', 'ContributionController@destroy')->name('cont.delete');
 
+Route::patch('contribution/{contribution}', 'ContributionController@update')->name('cont.update');
+
 //Uniform Routes
 
 Route::get('uniform', 'RecordController@uniformIndex')->name('uniform.index');
 
 Route::get('payment', 'PaymentController@index')->name('payment.index');
 
-Route::get('payment/{id}', 'PaymentController@create')->name('payment.create');
 
 Route::post('payment', 'PaymentController@store')->name('payment.store');
 

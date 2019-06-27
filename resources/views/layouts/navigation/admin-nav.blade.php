@@ -133,8 +133,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="{{ Request::path() == 'student' ? 'active' : '' }}"><a href="{{ url('student') }}"><i class="fa fa-circle-o"></i> Student</a></li>
-            <li class="{{ Request::path() == 'admin' ? 'active' : '' }}"><a href="{{ url('admin') }}"><i class="fa fa-circle-o"></i> Admin</a></li>
+            <li class="{{ Request::is('student*') ? 'active' : '' }}"><a href="{{ url('student') }}"><i class="fa fa-circle-o"></i> Student</a></li>
+            <li class="{{ Request::is('admin*') ? 'active' : '' }}"><a href="{{ url('admin') }}"><i class="fa fa-circle-o"></i> Admin</a></li>
           </ul>
         </li><li class="treeview {{ Request::path() == 'contribution' || Request::path() == 'fines' ? 'active' : '' }}">
           <a href="#">
@@ -145,13 +145,13 @@
             </span>
           </a>
           <ul class="treeview-menu">
-          <li class="{{ Request::path() == 'contribution' ? 'active' : '' }}"><a href="{{ url('contribution') }}"><i class="fa fa-circle-o"></i> <span>Contribution</span></a></li>
-          <li class="{{ Request::path() == 'uniform' ? 'active' : '' }}"><a href="{{ url('uniform') }}"><i class="fa fa-circle-o"></i> <span>Uniform Fines</span></a></li>
-          <li class="{{ Request::path() == 'fines' ? 'active' : '' }}"><a href="{{ url('fines') }}"><i class="fa fa-circle-o"></i> <span>Fines</span></a></li>
+          <li class="{{ Request::is('contribution*') ? 'active' : '' }}"><a href="{{ url('contribution') }}"><i class="fa fa-circle-o"></i> <span>Contribution</span></a></li>
+          <li class="{{ Request::is('uniform*') ? 'active' : '' }}"><a href="{{ url('uniform') }}"><i class="fa fa-circle-o"></i> <span>Uniform Fines</span></a></li>
+          <li class="{{ Request::is('fines*') ? 'active' : '' }}"><a href="{{ url('fines') }}"><i class="fa fa-circle-o"></i> <span>Fines</span></a></li>
           </ul>
         </li>
-        <li class="{{ Request::path() == 'event' ? 'active' : '' }}"><a href="{{ url('event') }}"><i class="fa fa-star-o"></i> <span>Events</span></a></li>
-        <li class="{{ Request::path() == 'history' ? 'active' : '' }}"><a href="{{ url('history') }}"><i class="fa fa-history"></i> <span>History</span></a></li>
+        <li class="{{ Request::is('event*') ? 'active' : '' }}"><a href="{{ url('event') }}"><i class="fa fa-star-o"></i> <span>Events</span></a></li>
+        <li class="{{ Request::is('history*') ? 'active' : '' }}"><a href="{{ url('history') }}"><i class="fa fa-history"></i> <span>History</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
