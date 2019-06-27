@@ -9,5 +9,7 @@ ECHO Copying .env file
 CALL copy .env.example .env
 ECHO generating application key...
 CALL php artisan key:generate
+call php artisan migrate:fresh --seed
 ECHO Initialization done!
+start CCSSMS.bat
 PAUSE
