@@ -88,7 +88,7 @@ class RecordController extends Controller
 
                 alert()->success('Signed In/Out Successfully', '!')->toToast('top');
 
-                return redirect('/');
+                return redirect('/attend');
               }
               else{
                 $student = Students::where('stud_id', '=', $request->input('id'))->first();
@@ -101,14 +101,14 @@ class RecordController extends Controller
                 $history->save();
 
                 alert()->error('Duplicate Sign In/Out', '!')->toToast('top');
-                return redirect('/');
+                return redirect('/attend');
               }
 
             }
             else{
-              alert()->error('There is no Event Today', '!')->toToast('top');
+              alert()->error('No Student with id' . $request->id .'is in the database', '!')->toToast('top');
               //Redirect page
-              return redirect('/');
+              return redirect('/attend');
             }
             break;
           }
@@ -126,7 +126,7 @@ class RecordController extends Controller
           $history->save();
           
           alert()->error('There is no Event Today', '!')->toToast('top');
-          return redirect('/');
+          return redirect('/attend');
         }
         else{
           $history = new History;
@@ -138,7 +138,7 @@ class RecordController extends Controller
           $history->save();
 
           alert()->error('There is no Event Today', '!')->toToast('top');
-          return redirect('/');
+          return redirect('/attend');
         }
       }
 
@@ -167,7 +167,7 @@ class RecordController extends Controller
         $history->save();
 
         alert()->error('You cannot sign in/out on this time', '!')->toToast('top');
-        return redirect('/');
+        return redirect('/attend');
       }
     }
     else{
